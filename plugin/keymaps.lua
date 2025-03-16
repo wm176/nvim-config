@@ -13,8 +13,26 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = true }   -- 配置：`noremap` 防止递归映射，`silent` 防止命令行输出
 )
 vim.api.nvim_set_keymap('n','<Leader>e',':NvimTreeOpen<CR>',{noremap = true})
-vim.api.nvim_set_keymap('n','<Leader>t',':Telescope find_files<CR>',{noremap = true})
-vim.api.nvim_set_keymap('n', '<Leader>b', ':lua require("dap").toggle_breakpoint()<CR>', { noremap = true, silent = true })
 -- 启动调试的快捷键映射
-vim.api.nvim_set_keymap('n', '<F5>', ':lua require("dap").continue()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>i', ':call InsertSnippet()<CR>', { noremap = true, silent = true })
 
+-- 定义 InsertSnippet 函数
+vim.cmd([[
+function! InsertSnippet()
+    normal! ggO
+    call setline(1, [
+        \ '#include <bits/stdc++.h>',
+        \ 'using namespace std;',
+        \ '#define ll long long',
+        \ '#define f(i,a,b) for(int i = (a);i <= (b);i ++)',
+        \ '#define g(i,a,b) for(int i = (a);i >= (b);i --)',
+        \ '#define all(x) x.begin(),x.end()',
+        \ '#define vi vector<int>',
+        \ '#define pii pair<int,int>',
+        \ '#define vpii vector<pair<int,int> >',
+        \ '#define debug(x) cout << #x << "=" << x << "\n";',
+        \ 'inline int r(){int x;cin >> x;return x;}',
+        \ ])
+    normal! Go
+endfunction
+]])
